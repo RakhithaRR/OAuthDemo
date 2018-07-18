@@ -13,6 +13,7 @@
     String grantType = "code";
     String authEndpoint = "";
     String callbackURI = "";
+    String clientCode = "onKvXou89QW4m3aJRVLhtw4O8n4a";
 
 %>
 
@@ -21,23 +22,45 @@
 <body>
     <h2>OAuth Demo</h2>
 
-    <form action="" method="post" name="OAuthRequest">
+    <table class="user_pass_table">
+        <tr>
+            <td colspan="4">Grant Type :</td>
+            <td colspan="4">Authorization Code Grant</td>
+        </tr>
+        <tr>
+            <td colspan="4">Scope :</td>
+            <td colspan="4"><%=scope%></td>
+        </tr>
+        <tr>
+            <td colspan="4">Client Code :</td>
+            <td><%=clientCode%></td>
+        </tr>
+        <tr>
+            <td colspan="4">Authorization Endpoint :</td>
+            <td colspan="4"><%=authEndpoint%></td>
+        </tr>
+        <tr>
+            <td colspan="4">Callback URI :</td>
+            <td colspan="4"><%=callbackURI%></td>
+        </tr>
+    </table>
+
+    <form action="authorizeUser.jsp" method="post" name="OAuthRequest">
         <table class="user_pass_table">
             <tr>
-                <td colspan="4">Grant Type :</td>
-                <td colspan="4">Authorization Code Grant</td>
+                <td colspan="4"><input type="text" name="grantType" value="<%=grantType%>" hidden size="50"></td>
             </tr>
             <tr>
-                <td colspan="4">Scope :</td>
-                <td colspan="4"><%=scope%></td>
+                <td colspan="4"><input type="text" name="scope" value="<%=scope%>" hidden size="50"></td>
             </tr>
             <tr>
-                <td colspan="4">Authorization Endpoint :</td>
-                <td colspan="4"><%=authEndpoint%></td>
+                <td><input type="text" name="clientCode" value="<%=clientCode%>" hidden size="50"></td>
             </tr>
             <tr>
-                <td colspan="4">Callback URI :</td>
-                <td colspan="4"><%=callbackURI%></td>
+                <td colspan="4"><input type="text" name="authEndpoint" value="<%=authEndpoint%>" hidden size="50"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" name="callbackURI" value="<%=callbackURI%>" hidden size="50"></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" name="authorize" value="Authorize"></td>
@@ -51,7 +74,7 @@
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 75%;
+    width: 100%;
 }
 
 td, th {
