@@ -11,6 +11,8 @@
     String sessionState = null;
     String error = null;
     String grantType = "code";
+    String authEndpoint = "";
+    String callbackURI = "";
 
 %>
 
@@ -31,11 +33,11 @@
             </tr>
             <tr>
                 <td colspan="4">Authorization Endpoint :</td>
-                <td colspan="4"></td>
+                <td colspan="4"><%=authEndpoint%></td>
             </tr>
             <tr>
                 <td colspan="4">Callback URI :</td>
-                <td colspan="4"></td>
+                <td colspan="4"><%=callbackURI%></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" name="authorize" value="Authorize"></td>
