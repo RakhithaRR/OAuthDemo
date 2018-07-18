@@ -2,6 +2,8 @@
 <%@page import="org.apache.commons.lang3.StringUtils" %>
 <%@page import="org.apache.oltu.oauth2.client.response.OAuthAuthzResponse" %>
 
+
+
 <%
     String code = null;
     String accessToken = null;
@@ -13,7 +15,21 @@
     String grantType = "code";
     String authEndpoint = "https://localhost:9443/oauth2/authorize";
     String callbackURI = "http://localhost:8080/OAuthDemoApp/home.jsp";
-    String clientCode = "onKvXou89QW4m3aJRVLhtw4O8n4a";
+    String clientCode = "7jcZ_ZxQ8eAlI3W3aTFSqs6vmbsa";
+    String tokenEndPoint="https://localhost:9443/oauth2/token";
+    String clientSecret="uKipDi8vrwBsI9yVWLGKQBGScuIa";
+
+    OAuthAuthzResponse authzResponse = null;
+
+    if (request.getParameter("code")!= null ) {
+                        code = request.getParameter("code");
+
+                    }
+
+
+
+
+
 
 %>
 
@@ -21,6 +37,8 @@
 <html>
 <body>
     <h2>OAuth Demo</h2>
+
+    <% if (accessToken == null && code == null ) {%>
 
     <table class="user_pass_table">
         <tr>
@@ -67,6 +85,30 @@
             </tr>
         </table>
     </form>
+
+    <%} else { %>
+
+    <form action="authorizeUser.jsp" method="post" name="OAuthRequest">
+            <table class="user_pass_table">
+                <tr>
+                    <td colspan="4">Authorization Code: <input type="text" name="grantType" value="<%=code%>" size="50"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Callback URL: <input type="text" name="scope" value="<%=callbackURI%>" size="50"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Access Token End Point: <input type="text" name="scope" value="<%=tokenEndPoint%>" size="50"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Client Secret: <input type="text" name="scope" value="<%=clientSecret%>" size="50"></td>
+                </tr>
+
+
+
+            </table>
+        </form>
+
+        <%}%>
 </body>
 </html>
 
