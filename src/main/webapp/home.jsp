@@ -11,8 +11,8 @@
     String sessionState = null;
     String error = null;
     String grantType = "code";
-    String authEndpoint = "";
-    String callbackURI = "";
+    String authEndpoint = "https://localhost:9443/oauth2/authorize";
+    String callbackURI = "http://localhost:8080/OAuthDemoApp/home.jsp";
     String clientCode = "onKvXou89QW4m3aJRVLhtw4O8n4a";
 
 %>
