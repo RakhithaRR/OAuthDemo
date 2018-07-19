@@ -35,8 +35,8 @@
         session.setAttribute("id_token", idToken);
     }
 
-
-
-
-
 %>
+
+<script type="text/javascript">
+    window.location = "home.jsp";
+</script>

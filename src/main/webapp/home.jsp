@@ -15,6 +15,23 @@
     String callbackURI = "http://localhost:8080/OAuthDemoApp/home.jsp";
     String clientCode = "onKvXou89QW4m3aJRVLhtw4O8n4a";
 
+     OAuthAuthzResponse authzResponse = null;
+
+     if(grantType != null) {
+        code = request.getParameter("code");
+        session.setAttribute("code", code);
+     }
+
+     if (grantType != null) {
+         code = (String) session.getAttribute("code");
+         if (code != null) {
+            accessToken = (String) session.getAttribute("access_token");
+            idToken = (String) session.getAttribute("id_token");
+         }
+     }
+
+
+
 %>
 
 <!DOCTYPE html>
@@ -22,6 +39,9 @@
 <body>
     <h2>OAuth Prototype App</h2>
 
+    <%
+        if(code == null && accessToken == null) {
+    %>
     <table class="user_pass_table">
         <tr>
             <td colspan="4">Grant Type :</td>
@@ -67,6 +87,21 @@
             </tr>
         </table>
     </form>
+
+    <%
+        } else if (code != null && accessToken == null) {
+
+    %>
+
+     <h2>YEAH!!</h2>
+
+     <%
+        }
+     %>
+
+
+
+
 </body>
 </html>
 
