@@ -12,7 +12,7 @@
     String clientSecret = request.getParameter("clientSecret");
     String callbackURI = (String)session.getParameter("callbackURI");
     String tokenEndpoint = request.getParameter("tokenEndpoint");
-    String authCode = request.getParameter("authCode");
+    String authCode = request.getParameter("code");
 
     TokenRequestBuilder OAuthTokenBuilder = new TokenRequestBuilder(tokenEndpoint);
 

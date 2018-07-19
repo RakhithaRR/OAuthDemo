@@ -14,6 +14,8 @@
     String authEndpoint = "https://localhost:9443/oauth2/authorize";
     String callbackURI = "http://localhost:8080/OAuthDemoApp/home.jsp";
     String clientCode = "onKvXou89QW4m3aJRVLhtw4O8n4a";
+    String clientSecret = "cgOyuzfkr5CBN3XDdpQNz4GoQdoa";
+    String accessTokenEndpoint = "https://localhost:9443/oauth2/token";
 
      OAuthAuthzResponse authzResponse = null;
 
@@ -93,7 +95,44 @@
 
     %>
 
-     <h2>YEAH!!</h2>
+     <table class="user_pass_table">
+         <tr>
+             <td colspan="4">Authorization Code :</td>
+             <td colspan="4"><%=code%></td>
+         </tr>
+         <tr>
+             <td colspan="4">Callback URL :</td>
+             <td colspan="4"><%=callbackURI%></td>
+         </tr>
+         <tr>
+             <td colspan="4">Access Token Endpoint :</td>
+             <td><%=accessTokenEndpoint%></td>
+         </tr>
+         <tr>
+             <td colspan="4">Client Secret :</td>
+             <td colspan="4"><%=clientSecret%></td>
+         </tr>
+     </table>
+
+     <form action="getTokens.jsp" method="post" name="TokenRequest">
+         <table class="user_pass_table">
+             <tr>
+                 <td colspan="4"><input type="text" name="code" value="<%=code%>" hidden size="50"></td>
+             </tr>
+             <tr>
+                 <td colspan="4"><input type="text" name="callbackURI" value="<%=callbackURI%>" hidden size="50"></td>
+             </tr>
+             <tr>
+                 <td><input type="text" name="tokenEndpoint" value="<%=accessTokenEndpoint%>" hidden size="50"></td>
+             </tr>
+             <tr>
+                 <td colspan="4"><input type="text" name="clientSecret" value="<%=clientSecret%>" hidden size="50"></td>
+             </tr>
+             <tr>
+                 <td colspan="2"><input type="submit" name="getToken" value="Get Tokens"></td>
+             </tr>
+         </table>
+         </form>
 
      <%
         }
