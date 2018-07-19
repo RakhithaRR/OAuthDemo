@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h2>OAuth Demo</h2>
+    <h2>OAuth Prototype App</h2>
 
     <table class="user_pass_table">
         <tr>
