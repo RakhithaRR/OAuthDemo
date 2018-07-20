@@ -3,20 +3,20 @@
 <%@page import="org.apache.oltu.oauth2.client.URLConnectionClient" %>
 <%@page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
 <%@page import="org.apache.oltu.oauth2.client.response.OAuthClientResponse" %>
+<%@page import="org.apache.oltu.oauth2.common.message.types.GrantType" %>
 <%@page import="OAuthDemo.TokenRequestBuilder" %>
 
 
 <%
-    String grantType = (String)session.getAttribute("grantType");
     String clientCode = (String)session.getAttribute("clientCode");
     String clientSecret = request.getParameter("clientSecret");
-    String callbackURI = (String)session.getParameter("callbackURI");
+    String callbackURI = (String)session.getAttribute("callbackURI");
     String tokenEndpoint = request.getParameter("tokenEndpoint");
     String authCode = request.getParameter("code");
 
     TokenRequestBuilder OAuthTokenBuilder = new TokenRequestBuilder(tokenEndpoint);
 
-    OAuthTokenBuilder.setGrantType(grantType);
+    OAuthTokenBuilder.setGrantType(GrantType.AUTHORIZATION_CODE);
     OAuthTokenBuilder.setClientId(clientCode);
     OAuthTokenBuilder.setClientSecret(clientSecret);
     OAuthTokenBuilder.setRedirectURI(callbackURI);
@@ -38,5 +38,5 @@
 %>
 
 <script type="text/javascript">
-    window.location = "home.jsp";
+    window.location = "home.jsp?gotTokens";
 </script>

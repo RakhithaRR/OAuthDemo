@@ -33,6 +33,7 @@ public class ClientServlet extends HttpServlet {
 
             // Create empty HostnameVerifier
             HostnameVerifier hv = new HostnameVerifier() {
+                @Override
                 public boolean verify(String urlHostName, SSLSession session) {
                     return true;
                 }
@@ -54,16 +55,16 @@ public class ClientServlet extends HttpServlet {
             } };
 
             sc.init(null, trustAllCerts, new java.security.SecureRandom());
-            //SSLSocketFactory sslSocketFactory = sc.getSocketFactory();
+            SSLSocketFactory sslSocketFactory = sc.getSocketFactory();
 
-            //HttpsURLConnection.setDefaultSSLSocketFactory(sslSocketFactory);
-            SSLContext.setDefault(sc);
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslSocketFactory);
+//            SSLContext.setDefault(sc);
             HttpsURLConnection.setDefaultHostnameVerifier(hv);
 
             // Load init parameters.
-            userName = config.getInitParameter("userName");
-            password = config.getInitParameter("password");
-            serverUrl = config.getInitParameter("serverUrl");
+//            userName = config.getInitParameter("userName");
+//            password = config.getInitParameter("password");
+//            serverUrl = config.getInitParameter("serverUrl");
 
         } catch (Exception e) {
             throw new ServletException(e);
@@ -73,8 +74,8 @@ public class ClientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
             IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("getTokens.jsp");
-        dispatcher.forward(req, resp);
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
+//        dispatcher.forward(req, resp);
     }
 
     @Override

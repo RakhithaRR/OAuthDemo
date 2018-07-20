@@ -1,6 +1,14 @@
 <%@page import="com.nimbusds.jwt.SignedJWT" %>
 <%@page import="org.apache.commons.lang3.StringUtils" %>
 <%@page import="org.apache.oltu.oauth2.client.response.OAuthAuthzResponse" %>
+<%@page import="javax.net.ssl.HostnameVerifier" %>
+<%@page import="javax.net.ssl.HttpsURLConnection" %>
+<%@page import="javax.net.ssl.SSLContext" %>
+<%@page import="javax.net.ssl.SSLSession" %>
+<%@page import="javax.net.ssl.TrustManager" %>
+<%@page import="javax.net.ssl.X509TrustManager" %>
+<%@page import="java.security.cert.X509Certificate" %>
+
 
 <%
     String code = null;
@@ -31,6 +39,35 @@
             idToken = (String) session.getAttribute("id_token");
          }
      }
+
+     TrustManager[] trustAllCerts = new TrustManager[] {
+
+        new X509TrustManager() {
+
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+            public void checkClientTrusted(X509Certificate[] certs, String authType) {  }
+
+            public void checkServerTrusted(X509Certificate[] certs, String authType) {  }
+
+        }
+     };
+
+     SSLContext sc = SSLContext.getInstance("SSL");
+     sc.init(null, trustAllCerts, new java.security.SecureRandom());
+     HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+     // Create all-trusting host name verifier
+     HostnameVerifier allHostsValid = new HostnameVerifier() {
+
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
+     };
+     // Install the all-trusting host verifier
+     HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 
 
 
